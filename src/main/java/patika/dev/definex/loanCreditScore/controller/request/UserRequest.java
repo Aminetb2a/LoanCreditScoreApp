@@ -1,20 +1,18 @@
-package patika.dev.definex.loanCreditScore.entity;
+package patika.dev.definex.loanCreditScore.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-import javax.annotation.processing.Generated;
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Document("user")
-public class User {
-    @Id
-    private String id;
+public class UserRequest {
+    // TODO add validation
     private Long idNo;
     private String name;
     private Double income;
