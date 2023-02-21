@@ -2,15 +2,16 @@ package patika.dev.definex.loanCreditScore.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Document("user")
+@NoArgsConstructor
+@Accessors(chain = true)
 public class User {
     @Id
     private String id;
