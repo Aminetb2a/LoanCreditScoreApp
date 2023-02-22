@@ -11,6 +11,16 @@ public class UserMapper {
                 .setIncome(userDTO.getIncome())
                 .setSurname(userDTO.getSurname())
                 .setBirthDate(userDTO.getBirthDate())
-                .setPhoneNumber(userDTO.getPhoneNumber());
+                .setPhoneNumber(userDTO.getPhoneNumber())
+                .setCollateralIdNo(userDTO.getCollateralIdNo());
+    }
+    public User mapToUser(User user, UserDTO userDTO) {
+        return user
+                .setName(userDTO.getName())
+                .setIncome(userDTO.getIncome())
+                .setSurname(userDTO.getSurname())
+                .setBirthDate(userDTO.getBirthDate())
+                .setPhoneNumber(userDTO.getPhoneNumber())
+                .setCollateralIdNo(userDTO.getCollateralIdNo());
     }
 }

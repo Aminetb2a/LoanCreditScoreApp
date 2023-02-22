@@ -7,12 +7,14 @@ import patika.dev.definex.loanCreditScore.model.User;
 public class UserDTOMapper {
     public UserDTO mapToModel(UserRequest userRequest) {
         return new UserDTO()
+                .setId(userRequest.getId())
                 .setIdNo(userRequest.getIdNo())
                 .setName(userRequest.getName())
                 .setIncome(userRequest.getIncome())
                 .setSurname(userRequest.getSurname())
                 .setBirthDate(userRequest.getBirthDate())
-                .setPhoneNumber(userRequest.getPhoneNumber());
+                .setPhoneNumber(userRequest.getPhoneNumber())
+                .setCollateralIdNo(userRequest.getCollateralIdNo());
     }
 
     public UserDTO mapToModel(User user) {
@@ -23,6 +25,7 @@ public class UserDTOMapper {
                 .setIncome(user.getIncome())
                 .setSurname(user.getSurname())
                 .setBirthDate(user.getBirthDate())
-                .setPhoneNumber(user.getPhoneNumber());
+                .setPhoneNumber(user.getPhoneNumber())
+                .setCollateralIdNo(user.getCollateralIdNo());
     }
 }
