@@ -29,6 +29,15 @@ public class UserService {
         }
     }
 
+    public BaseResponse updateUser(UserDTO userDTO) {
+        try {
+            User user = userRepository.findById(userDTO.getId()).get();
+            User response = userRepository.save(mapper.mapToUser(user, userDTO));
+            return getSuccess(mapperDTO.mapToModel(response));
+        } catch (Exception ex) {
+            return getFailure(ex.getMessage());
+        }
+    }
 
     private BaseResponse getSuccess(Object data){
         result.setSuccess(true);

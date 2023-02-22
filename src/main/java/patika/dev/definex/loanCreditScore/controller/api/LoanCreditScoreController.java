@@ -27,4 +27,13 @@ public class LoanCreditScoreController {
                 :HttpStatus.BAD_REQUEST.value())
                 .body(response);
     }
+
+    @PutMapping("user/update")
+    public ResponseEntity updateUser(@RequestBody UserRequest userRequest){
+        BaseResponse response = userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
+        return ResponseEntity.status(response.getSuccess()
+                        ? HttpStatus.OK.value()
+                        :HttpStatus.BAD_REQUEST.value())
+                .body(response);
+    }
 }
