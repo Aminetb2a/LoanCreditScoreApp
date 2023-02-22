@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class UserRequest {
     // TODO add validation
+    private String id;
     private Long idNo;
     private String name;
     private Double income;
