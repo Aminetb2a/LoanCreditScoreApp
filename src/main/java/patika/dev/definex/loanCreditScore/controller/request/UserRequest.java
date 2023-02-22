@@ -1,10 +1,9 @@
 package patika.dev.definex.loanCreditScore.controller.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -17,7 +16,7 @@ public class UserRequest {
     private String name;
     private Double income;
     private String surname;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthDate;
     private String phoneNumber;
     private Long collateralIdNo;
