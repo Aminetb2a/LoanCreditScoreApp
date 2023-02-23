@@ -2,11 +2,11 @@ package patika.dev.definex.loanCreditScore.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@Builder
 @JsonPropertyOrder({"success", "message", "data"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseResponse {
