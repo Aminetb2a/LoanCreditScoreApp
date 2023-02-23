@@ -9,31 +9,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import patika.dev.definex.loanCreditScore.controller.request.UserRequest;
+import patika.dev.definex.loanCreditScore.dto.UserDTO;
 import patika.dev.definex.loanCreditScore.dto.mapper.UserDTOMapper;
-import patika.dev.definex.loanCreditScore.model.BaseResponse;
-import patika.dev.definex.loanCreditScore.service.UserService;
+import patika.dev.definex.loanCreditScore.service.impl.UserServiceImpl;
 
 @Validated
 @RestController
 @RequiredArgsConstructor
 public class LoanCreditScoreController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @PostMapping("user/add")
-    public ResponseEntity addUser(@RequestBody UserRequest userRequest){
-        BaseResponse response = userService.createUser(new UserDTOMapper().mapToModel(userRequest));
-        return ResponseEntity.status(response.getSuccess()
-                ? HttpStatus.OK.value()
-                :HttpStatus.BAD_REQUEST.value())
-                .body(response);
+    public UserDTO addUser(@RequestBody UserRequest userRequest){
+        return userService.createUser(new UserDTOMapper().mapToModel(userRequest));
     }
 
     @PutMapping("user/update")
-    public ResponseEntity updateUser(@RequestBody UserRequest userRequest){
-        BaseResponse response = userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
-        return ResponseEntity.status(response.getSuccess()
-                        ? HttpStatus.OK.value()
-                        :HttpStatus.BAD_REQUEST.value())
-                .body(response);
+    public UserDTO updateUser(@RequestBody UserRequest userRequest){
+        return userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
     }
 }
