@@ -1,9 +1,12 @@
-package patika.dev.definex.loanCreditScore.model;
+package patika.dev.definex.loanCreditScore.model.user;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
+import patika.dev.definex.loanCreditScore.enums.CreditStatus;
+import patika.dev.definex.loanCreditScore.model.BaseModel;
 
 import java.util.Date;
 
@@ -18,6 +21,8 @@ public class User extends BaseModel {
     private Double income;
     private String surname;
     private Date birthDate;
+    private Double creditLimit;
     private String phoneNumber;
     private Long collateralIdNo;
+    private CreditStatus creditStatus;
 }
