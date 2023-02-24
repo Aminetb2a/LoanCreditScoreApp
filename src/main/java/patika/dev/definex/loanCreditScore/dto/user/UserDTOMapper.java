@@ -1,11 +1,10 @@
-package patika.dev.definex.loanCreditScore.dto.mapper;
+package patika.dev.definex.loanCreditScore.dto.user;
 
-import patika.dev.definex.loanCreditScore.controller.request.UserRequest;
-import patika.dev.definex.loanCreditScore.dto.UserDTO;
-import patika.dev.definex.loanCreditScore.model.User;
+import patika.dev.definex.loanCreditScore.dto.request.UserRequestDTO;
+import patika.dev.definex.loanCreditScore.model.user.User;
 
 public class UserDTOMapper {
-    public UserDTO mapToModel(UserRequest userRequest) {
+    public UserDTO mapToModel(UserRequestDTO userRequest) {
         return new UserDTO()
                 .setId(userRequest.getId())
                 .setIdNo(userRequest.getIdNo())
