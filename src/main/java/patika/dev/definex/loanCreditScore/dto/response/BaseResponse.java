@@ -1,4 +1,4 @@
-package patika.dev.definex.loanCreditScore.model;
+package patika.dev.definex.loanCreditScore.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -13,8 +13,8 @@ import java.util.List;
 @JsonPropertyOrder({"success", "message", "data"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseResponse {
-    private Boolean success;
-    private String message;
-    private List<ExceptionModel> exception;
     private Object data;
+    private String message;
+    private Boolean success;
+    private List<ExceptionModel> exception;
 }
