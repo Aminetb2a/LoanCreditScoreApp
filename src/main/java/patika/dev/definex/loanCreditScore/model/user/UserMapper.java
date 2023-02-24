@@ -1,7 +1,6 @@
-package patika.dev.definex.loanCreditScore.model.mapper;
+package patika.dev.definex.loanCreditScore.model.user;
 
-import patika.dev.definex.loanCreditScore.dto.UserDTO;
-import patika.dev.definex.loanCreditScore.model.User;
+import patika.dev.definex.loanCreditScore.dto.user.UserDTO;
 
 public class UserMapper {
     public User mapToUser(UserDTO userDTO) {
@@ -12,8 +11,11 @@ public class UserMapper {
                 .setSurname(userDTO.getSurname())
                 .setBirthDate(userDTO.getBirthDate())
                 .setPhoneNumber(userDTO.getPhoneNumber())
+                .setCreditLimit(userDTO.getCreditLimit())
+                .setCreditStatus(userDTO.getCreditStatus())
                 .setCollateralIdNo(userDTO.getCollateralIdNo());
     }
+
     public User mapToUser(User user, UserDTO userDTO) {
         return user
                 .setName(userDTO.getName())
@@ -21,6 +23,8 @@ public class UserMapper {
                 .setSurname(userDTO.getSurname())
                 .setBirthDate(userDTO.getBirthDate())
                 .setPhoneNumber(userDTO.getPhoneNumber())
+                .setCreditLimit(userDTO.getCreditLimit())
+                .setCreditStatus(userDTO.getCreditStatus())
                 .setCollateralIdNo(userDTO.getCollateralIdNo());
     }
 }
