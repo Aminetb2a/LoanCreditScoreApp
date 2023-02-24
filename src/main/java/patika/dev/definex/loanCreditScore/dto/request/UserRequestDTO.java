@@ -1,17 +1,15 @@
-package patika.dev.definex.loanCreditScore.controller.request;
+package patika.dev.definex.loanCreditScore.dto.request;
 
-import lombok.Getter;
+import jakarta.validation.constraints.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-public class UserRequest {
+public class UserRequestDTO {
     private String id;
     @Positive
     @Digits(integer = 15, fraction = 0)
