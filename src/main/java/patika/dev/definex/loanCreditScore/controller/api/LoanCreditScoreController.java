@@ -51,4 +51,18 @@ public class LoanCreditScoreController {
     public UserDTO updateUser(@Valid @RequestBody UserRequest userRequest) {
         return userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
     }
+
+    @Operation(summary = "Delete User")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User deleted successfully",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content)})
+    @DeleteMapping("user/delete/{id}")
+    public boolean deleteUser(@Valid @PathVariable @NotBlank(message = "you need to provide the User ID as path variable") @Size(min = 15) String id) {
+        return userService.deleteUser(id);
+    }
 }

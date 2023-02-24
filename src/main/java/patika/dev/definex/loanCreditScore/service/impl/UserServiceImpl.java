@@ -33,4 +33,10 @@ public class UserServiceImpl implements UserService {
         // TODO return credit score to User
         return mapperDTO.mapToModel(savedUser);
     }
+
+    public boolean deleteUser(String id) {
+        userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        userRepository.deleteById(id);
+        return true;
+    }
 }
