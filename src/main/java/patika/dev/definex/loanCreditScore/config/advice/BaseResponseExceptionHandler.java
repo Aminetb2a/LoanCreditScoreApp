@@ -10,7 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import patika.dev.definex.loanCreditScore.model.BaseResponse;
+import patika.dev.definex.loanCreditScore.dto.response.BaseResponse;
 import patika.dev.definex.loanCreditScore.model.error.ExceptionModel;
 
 import java.util.List;

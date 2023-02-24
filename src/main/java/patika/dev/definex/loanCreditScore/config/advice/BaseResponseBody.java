@@ -7,7 +7,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import patika.dev.definex.loanCreditScore.model.BaseResponse;
+import patika.dev.definex.loanCreditScore.dto.response.BaseResponse;
 
 @RestControllerAdvice
 public class BaseResponseBody implements ResponseBodyAdvice {

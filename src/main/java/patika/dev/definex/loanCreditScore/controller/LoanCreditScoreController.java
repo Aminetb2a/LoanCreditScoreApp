@@ -12,10 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import patika.dev.definex.loanCreditScore.controller.request.UserRequest;
-import patika.dev.definex.loanCreditScore.dto.UserDTO;
-import patika.dev.definex.loanCreditScore.dto.mapper.UserDTOMapper;
-import patika.dev.definex.loanCreditScore.service.impl.UserServiceImpl;
+import patika.dev.definex.loanCreditScore.dto.creditscore.CreditScore;
+import patika.dev.definex.loanCreditScore.dto.request.UserRequestDTO;
+import patika.dev.definex.loanCreditScore.dto.user.UserDTO;
+import patika.dev.definex.loanCreditScore.dto.user.UserDTOMapper;
+import patika.dev.definex.loanCreditScore.service.user.UserServiceImpl;
 
 
 @Validated

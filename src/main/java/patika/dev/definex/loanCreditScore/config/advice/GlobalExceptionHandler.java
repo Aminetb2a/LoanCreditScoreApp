@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import patika.dev.definex.loanCreditScore.config.exception.UserFoundException;
 import patika.dev.definex.loanCreditScore.config.exception.UserNotFoundException;
-import patika.dev.definex.loanCreditScore.model.BaseResponse;
+import patika.dev.definex.loanCreditScore.dto.response.BaseResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
