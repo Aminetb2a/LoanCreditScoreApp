@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import patika.dev.definex.loanCreditScore.config.exception.UserFoundException;
 import patika.dev.definex.loanCreditScore.config.exception.UserNotFoundException;
 import patika.dev.definex.loanCreditScore.model.BaseResponse;
 
@@ -15,7 +16,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({DuplicateKeyException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody BaseResponse duplicateKeyExceptionHandler(DuplicateKeyException ex) {
-        return getResponse(ex.getCause().getMessage());
+        return getResponse("A user with this information is already registered.");
     }
 
     @ExceptionHandler({IllegalArgumentException.class})
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({UserNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody BaseResponse UserNotFoundExceptionHandler(UserNotFoundException ex) {
+        return getResponse(ex.getMessage());
+    }
+
+    @ExceptionHandler({UserFoundException.class})
+    @ResponseStatus(HttpStatus.FOUND)
+    public @ResponseBody BaseResponse UserFoundExceptionHandler(UserFoundException ex) {
         return getResponse(ex.getMessage());
     }
 
