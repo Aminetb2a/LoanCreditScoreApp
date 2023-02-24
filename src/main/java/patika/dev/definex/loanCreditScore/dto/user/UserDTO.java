@@ -1,17 +1,15 @@
-package patika.dev.definex.loanCreditScore.dto;
+package patika.dev.definex.loanCreditScore.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
+import patika.dev.definex.loanCreditScore.enums.CreditStatus;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -24,5 +22,7 @@ public class UserDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
     private String phoneNumber;
+    private Double creditLimit;
     private Long collateralIdNo;
+    private CreditStatus creditStatus;
 }
