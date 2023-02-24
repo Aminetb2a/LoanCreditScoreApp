@@ -1,10 +1,12 @@
 package patika.dev.definex.loanCreditScore.config.advice;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -28,28 +30,23 @@ public class BaseResponseExceptionHandler extends ResponseEntityExceptionHandler
      * @param request The current request.
      * @return A ResponseEntity with a bad request status and a ValidationError object.
      */
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @Override
-//    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        return getResponse(ex.getMessage());
-//    }
-//
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @Override
-//    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        return getResponse(ex.getMessage());
-//    }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         return getResponse(ex.getMessage(), null);
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @Override
-//    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        return getResponse(ex.getMessage());
-//    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        return getResponse(ex.getMessage(), null);
+    }
+
+
+    @Override
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        return getResponse(ex.getMessage(), null);
+    }
 
     /**
      * The MethodArgumentNotValidException handler, return a 400 Bad Request response with a
@@ -61,9 +58,9 @@ public class BaseResponseExceptionHandler extends ResponseEntityExceptionHandler
      * @param request The request that triggered the exception
      * @return A list of validation errors.
      */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         List<ExceptionModel> validationErrors = ex.getBindingResult().getFieldErrors()
                 .stream()
                 .map(violation ->

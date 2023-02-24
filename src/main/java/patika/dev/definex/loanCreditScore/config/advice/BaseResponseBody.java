@@ -15,7 +15,7 @@ public class BaseResponseBody implements ResponseBodyAdvice {
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
         String className = returnType.getContainingClass().toString();
-        return !className.contains("Exception");
+        return !className.contains("Exception") && !className.contains("error");
     }
 
     @Override
