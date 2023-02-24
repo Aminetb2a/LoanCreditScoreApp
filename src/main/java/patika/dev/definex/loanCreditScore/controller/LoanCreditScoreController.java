@@ -1,4 +1,4 @@
-package patika.dev.definex.loanCreditScore.controller.api;
+package patika.dev.definex.loanCreditScore.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,7 +35,7 @@ public class LoanCreditScoreController {
                     content = @Content)})
     @PostMapping("user/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO addUser(@Valid @RequestBody UserRequest userRequest) {
+    public CreditScore addUser(@Valid @RequestBody UserRequestDTO userRequest) {
         return userService.createUser(new UserDTOMapper().mapToModel(userRequest));
     }
 
@@ -49,7 +49,7 @@ public class LoanCreditScoreController {
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content)})
     @PutMapping("user/update")
-    public UserDTO updateUser(@Valid @RequestBody UserRequest userRequest) {
+    public UserDTO updateUser(@Valid @RequestBody UserRequestDTO userRequest) {
         return userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
     }
 
