@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +17,8 @@ import patika.dev.definex.loancreditscore.dto.request.UserRequestDTO;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
 import patika.dev.definex.loancreditscore.dto.user.UserDTOMapper;
 import patika.dev.definex.loancreditscore.service.user.UserServiceImpl;
+
+import java.time.LocalDate;
 
 
 @Validated
@@ -65,5 +67,21 @@ public class LoanCreditScoreController {
     @DeleteMapping("user/delete/{id}")
     public boolean deleteUser(@Valid @PathVariable @NotBlank(message = "you need to provide the User ID as path variable") @Size(min = 15) String id) {
         return userService.deleteUser(id);
+    }
+
+    @Operation(summary = "Credit Score Report")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Credit Score Report retrieved successfully",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content)})
+    @GetMapping("report")
+    public CreditScore getCreditScoreReport(
+            @Valid @RequestParam @Positive @NotNull(message = "you need to provide the User ID number as idNo") @Digits(integer = 15, fraction = 0) Long idNo,
+            @Valid @RequestParam @Past @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthdate) {
+        return userService.getCreditScoreReport(idNo, birthdate);
     }
 }
