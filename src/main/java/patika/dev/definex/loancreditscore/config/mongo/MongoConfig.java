@@ -13,7 +13,6 @@ import java.util.Optional;
 @EnableMongoRepositories("patika.dev.definex.loancreditscore.repository")
 @EnableMongoAuditing(dateTimeProviderRef = "auditingDateTimeProvider")
 public class MongoConfig {
-
     @Bean(name = "auditingDateTimeProvider")
     public DateTimeProvider dateTimeProvider() {
         return () -> Optional.of(LocalDateTime.now());

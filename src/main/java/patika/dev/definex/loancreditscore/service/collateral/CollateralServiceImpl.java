@@ -10,6 +10,7 @@ public class CollateralServiceImpl implements CollateralService {
 
     @Override
     public Double getCollateralValue(Long id) {
-        return id == null ? null : random.nextDouble(50000.0, 5000000.0);
+        return id == null ? null : 10000.0; // TODO uncomment for tests usage
+//        return id == null ? null : random.nextDouble(50000.0, 5000000.0);
     }
 }
