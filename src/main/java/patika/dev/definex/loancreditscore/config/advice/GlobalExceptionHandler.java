@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({UserFoundException.class})
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody BaseResponse UserFoundExceptionHandler(UserFoundException ex) {
         return getResponse(ex.getMessage());
     }
