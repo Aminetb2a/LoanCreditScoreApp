@@ -20,22 +20,24 @@ import patika.dev.definex.loancreditscore.service.user.UserServiceImpl;
 
 import java.time.LocalDate;
 
+import static patika.dev.definex.loancreditscore.constant.Common.Path.*;
+
 
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/loan")
+@RequestMapping(SLASH + API + SLASH + LOAN)
 public class LoanCreditScoreController {
     private final UserServiceImpl userService;
 
-    @Operation(summary = "Create a User")
+    @Operation(summary = "Apply for loan")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created successfully",
+            @ApiResponse(responseCode = "201", description = "Applied for loan successfully",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Bad Request",
+                            schema = @Schema(implementation = CreditScore.class))}),
+            @ApiResponse(responseCode = "404", description = "Bad Request",
                     content = @Content)})
-    @PostMapping("user/add")
+    @PostMapping(USER + SLASH + APPLY)
     @ResponseStatus(HttpStatus.CREATED)
     public CreditScore addUser(@Valid @RequestBody UserRequestDTO userRequest) {
         return userService.createUser(new UserDTOMapper().mapToModel(userRequest));
@@ -46,25 +48,19 @@ public class LoanCreditScoreController {
             @ApiResponse(responseCode = "200", description = "User updated successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Bad Request",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
+            @ApiResponse(responseCode = "404", description = "Bad Request",
                     content = @Content)})
-    @PutMapping("user/update")
+    @PutMapping(USER + SLASH + UPDATE)
     public UserDTO updateUser(@Valid @RequestBody UserRequestDTO userRequest) {
         return userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
     }
 
     @Operation(summary = "Delete User")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User deleted successfully",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "User deleted successfully"),
             @ApiResponse(responseCode = "400", description = "Bad Request",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content)})
-    @DeleteMapping("user/delete/{id}")
+    @DeleteMapping(USER + SLASH + DELETE + SLASH + "{id}")
     public boolean deleteUser(@Valid @PathVariable @NotBlank(message = "you need to provide the User ID as path variable") @Size(min = 15) String id) {
         return userService.deleteUser(id);
     }
@@ -73,12 +69,10 @@ public class LoanCreditScoreController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Credit Score Report retrieved successfully",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Bad Request",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "User not found",
+                            schema = @Schema(implementation = CreditScore.class))}),
+            @ApiResponse(responseCode = "404", description = "Bad Request",
                     content = @Content)})
-    @GetMapping("report")
+    @GetMapping(REPORT)
     public CreditScore getCreditScoreReport(
             @Valid @RequestParam @Positive @NotNull(message = "you need to provide the User ID number as idNo") @Digits(integer = 15, fraction = 0) Long idNo,
             @Valid @RequestParam @Past @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthdate) {
