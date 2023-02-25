@@ -51,7 +51,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <version>3.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>9.2.4</version>
+        </dependency>
     </dependencies>
 
     <build>
