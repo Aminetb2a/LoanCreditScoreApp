@@ -24,7 +24,7 @@ public class CreditLimitCalculatorImpl implements CreditLimitCalculatorService {
         Double collateralValue = collateralService.getCollateralValue(user.getCollateralIdNo());
         if (creditScore > CreditScore.HIGH) {
             double limit = user.getIncome() * CREDIT_LIMIT_MULTIPLIER;
-            return collateralValue != null ? limit * (collateralValue * CreditScoreConstant.Extra.HIGHER) : limit;
+            return collateralValue != null ? limit + (collateralValue * CreditScoreConstant.Extra.HIGHER) : limit;
         } else
             return getLimit(user.getIncome(), collateralValue, incomeRangeService.getIncomeRange(user.getIncome()));
     }

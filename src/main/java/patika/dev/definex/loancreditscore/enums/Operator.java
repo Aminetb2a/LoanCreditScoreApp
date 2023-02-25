@@ -10,7 +10,7 @@ public enum Operator {
     LOW {
         @Override
         public Double apply(Double income, Double collateralValue) {
-            return collateralValue != null ? Limit.LOW * (collateralValue * Extra.LOW) : Limit.LOW;
+            return collateralValue != null ? Limit.LOW + (collateralValue * Extra.LOW) : Limit.LOW;
         }
     },
 
@@ -18,7 +18,7 @@ public enum Operator {
     MEDIUM {
         @Override
         public Double apply(Double income, Double collateralValue) {
-            return collateralValue != null ? Limit.MEDIUM * (collateralValue * Extra.MEDIUM) : Limit.MEDIUM;
+            return collateralValue != null ? Limit.MEDIUM + (collateralValue * Extra.MEDIUM) : Limit.MEDIUM;
         }
     },
 
@@ -27,7 +27,7 @@ public enum Operator {
         @Override
         public Double apply(Double income, Double collateralValue) {
             Double limit = income * (CREDIT_LIMIT_MULTIPLIER / 2);
-            return collateralValue != null ? limit * (collateralValue * Extra.HIGH) : limit;
+            return collateralValue != null ? limit + (collateralValue * Extra.HIGH) : limit;
         }
     };
 
