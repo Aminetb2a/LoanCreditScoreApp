@@ -10,7 +10,7 @@ public class CreditStatusServiceImpl implements CreditStatusService {
     @Override
     public CreditStatus getCreditStatus(Double creditScore) {
         if (creditScore < CreditScoreConstant.CreditScore.LOW)
-            return CreditStatus.REJECTION;
-        return CreditStatus.APPROVAL;
+            return CreditStatus.REJECTED;
+        return CreditStatus.APPROVED;
     }
 }

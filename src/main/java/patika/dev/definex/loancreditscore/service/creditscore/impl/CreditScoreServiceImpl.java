@@ -21,7 +21,7 @@ public class CreditScoreServiceImpl implements CreditScoreService {
     public CreditScore processCreditScore(UserDTO user) {
         Double creditScore = getCreditScore(user.getIdNo());
         CreditStatus status = creditStatusService.getCreditStatus(creditScore);
-        Double limit = status.equals(CreditStatus.REJECTION)
+        Double limit = status.equals(CreditStatus.REJECTED)
                 ? 0.0
                 : creditLimitCalculator.getCreditLimit(user, creditScore);
         return CreditScore.builder()
