@@ -19,6 +19,7 @@ import java.util.Date;
 public class User extends BaseModel {
     private Long idNo;
     private String name;
+    private String smsId;
     private Double income;
     private String surname;
     private Date birthDate;

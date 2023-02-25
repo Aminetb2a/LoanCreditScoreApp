@@ -17,6 +17,7 @@ public class UserDTO {
     private String id;
     private Long idNo;
     private String name;
+    private String smsId;
     private Double income;
     private String surname;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

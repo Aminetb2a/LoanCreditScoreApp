@@ -7,6 +7,7 @@ public class UserMapper {
         return new User()
                 .setIdNo(userDTO.getIdNo())
                 .setName(userDTO.getName())
+                .setSmsId(userDTO.getSmsId())
                 .setIncome(userDTO.getIncome())
                 .setSurname(userDTO.getSurname())
                 .setBirthDate(userDTO.getBirthDate())
