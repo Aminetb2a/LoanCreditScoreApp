@@ -14,6 +14,8 @@ import patika.dev.definex.loancreditscore.model.user.User;
 import patika.dev.definex.loancreditscore.model.user.UserMapper;
 import patika.dev.definex.loancreditscore.repository.UserRepository;
 import patika.dev.definex.loancreditscore.service.creditscore.CreditScoreService;
+import patika.dev.definex.loancreditscore.service.sms.SmsService;
+import patika.dev.definex.loancreditscore.service.user.util.SmsGenerator;
 import patika.dev.definex.loancreditscore.service.utils.DateFormatter;
 
 import java.time.LocalDate;
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
     private static final UserMapper mapper = new UserMapper();
     private static final UserDTOMapper mapperDTO = new UserDTOMapper();
     private static final CreditScoreMapper creditScoreMapper = new CreditScoreMapper();
+    private final SmsService smsService;
+    private final SmsGenerator smsGenerator;
     private final DateFormatter dateFormatter;
     private final UserRepository userRepository;
     private final CreditScoreService creditScoreService;
@@ -48,8 +52,11 @@ public class UserServiceImpl implements UserService {
         CreditScore creditScore = creditScoreService.processCreditScore(userDTO);
         userDTO.setCreditLimit(creditScore.getLimit());
         userDTO.setCreditStatus(creditScore.getStatus());
+        //send sms to client
+        Message smsStatus = smsService.sendSms(userDTO.getPhoneNumber(), smsGenerator.generateSms(userDTO));
+        userDTO.setSmsId(smsStatus.getSid());
+        // save records to db
         userRepository.save(mapper.mapToUser(userDTO));
-        // TODO send sms
         return creditScore;
     }
 
