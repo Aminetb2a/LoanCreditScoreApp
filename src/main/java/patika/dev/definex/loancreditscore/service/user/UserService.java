@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public interface UserService {
     CreditScore getCreditScoreReport(Long idNo, LocalDate birthDate);
 
-    CreditScore createUser(UserDTO userDTO);
+    CreditScore applyToLoan(UserDTO userDTO);
 
     UserDTO updateUser(UserDTO userDTO);
 

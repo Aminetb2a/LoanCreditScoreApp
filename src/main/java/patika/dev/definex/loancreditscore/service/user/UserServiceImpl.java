@@ -1,5 +1,6 @@
 package patika.dev.definex.loancreditscore.service.user;
 
+import com.twilio.rest.api.v2010.account.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CreditScore createUser(UserDTO userDTO) {
+    public CreditScore applyToLoan(UserDTO userDTO) {
         // check if user with idNo exists
         if (userRepository.findByIdNo(userDTO.getIdNo()).isPresent())
             throw new UserFoundException();

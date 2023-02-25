@@ -39,8 +39,8 @@ public class LoanCreditScoreController {
                     content = @Content)})
     @PostMapping(USER + SLASH + APPLY)
     @ResponseStatus(HttpStatus.CREATED)
-    public CreditScore addUser(@Valid @RequestBody UserRequestDTO userRequest) {
-        return userService.createUser(new UserDTOMapper().mapToModel(userRequest));
+    public CreditScore applyToLoan(@Valid @RequestBody UserRequestDTO userRequest) {
+        return userService.applyToLoan(new UserDTOMapper().mapToModel(userRequest));
     }
 
     @Operation(summary = "Update User")
