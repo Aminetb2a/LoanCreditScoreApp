@@ -39,9 +39,12 @@ public class UserServiceImpl implements UserService {
     @SneakyThrows
     @Override
     public CreditScore getCreditScoreReport(Long idNo, LocalDate birthDate) {
+        //format date
         Date birthdate = dateFormatter.getFormattedDate(birthDate);
+        // get user info by idNo and birthdate
         User user = userRepository.findByIdNoAndBirthDate(idNo, birthdate)
                 .orElseThrow(() -> new UserNotFoundException(idNo.toString()));
+        // return credit score
         return creditScoreMapper.mapToModel(user);
     }
 
@@ -81,9 +84,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(String id) {
+    public void deleteUser(String id) {
+        //check if user with id exists
         userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         userRepository.deleteById(id);
-        return true;
     }
 }

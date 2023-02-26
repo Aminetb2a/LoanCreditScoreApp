@@ -61,8 +61,8 @@ public class LoanCreditScoreController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     @DeleteMapping(USER + SLASH + DELETE + SLASH + "{id}")
-    public boolean deleteUser(@Valid @PathVariable @NotBlank(message = "you need to provide the User ID as path variable") @Size(min = 15) String id) {
-        return userService.deleteUser(id);
+    public void deleteUser(@Valid @PathVariable @NotBlank(message = "you need to provide the User ID as path variable") @Size(min = 15) String id) {
+        userService.deleteUser(id);
     }
 
     @Operation(summary = "Credit Score Report")
