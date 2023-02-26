@@ -12,6 +12,13 @@ import patika.dev.definex.loancreditscore.config.prop.TwilioProperties;
 public class SmsServiceImpl implements SmsService {
     private final TwilioProperties twilioProperties;
 
+    /**
+     * Method to send sms using Twilio
+     *
+     * @param phoneNumber user's phone number
+     * @param content     sms' content
+     * @return Message Twilio's response
+     */
     @Override
     public Message sendSms(String phoneNumber, String content) {
         login();
@@ -21,6 +28,9 @@ public class SmsServiceImpl implements SmsService {
         return message;
     }
 
+    /**
+     * Method for login to Twilio
+     */
     private void login() {
         Twilio.init(twilioProperties.getUsername(), twilioProperties.getPassword());
     }
