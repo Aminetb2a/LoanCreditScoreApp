@@ -36,9 +36,9 @@ public class LoanCreditScoreController {
             @ApiResponse(responseCode = "201", description = "Applied for loan successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = CreditScore.class))}),
-            @ApiResponse(responseCode = "404", description = "Bad Request",
+            @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
-    @PostMapping(USER + SLASH + APPLY)
+    @PostMapping(APPLY)
     @ResponseStatus(HttpStatus.CREATED)
     public CreditScore applyToLoan(@Valid @RequestBody UserRequestDTO userRequest) {
         return userService.applyToLoan(new UserDTOMapper().mapToUserDTO(userRequest));
@@ -49,7 +49,7 @@ public class LoanCreditScoreController {
             @ApiResponse(responseCode = "200", description = "User updated successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class))}),
-            @ApiResponse(responseCode = "404", description = "Bad Request",
+            @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     @PutMapping(USER + SLASH + UPDATE)
     public UserDTO updateUser(@Valid @RequestBody UserRequestDTO userRequest) {
@@ -66,14 +66,14 @@ public class LoanCreditScoreController {
         userService.deleteUser(id);
     }
 
-    @Operation(summary = "Credit Score Report")
+    @Operation(summary = "Loan Application Report")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Credit Score Report retrieved successfully",
+            @ApiResponse(responseCode = "200", description = "Credit Loan Report returned successfully",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = CreditScore.class))}),
-            @ApiResponse(responseCode = "404", description = "Bad Request",
+            @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
-    @GetMapping(REPORT)
+    @GetMapping(APPLICATION + SLASH + REPORT)
     public CreditScore getCreditScoreReport(
             @Valid @RequestParam @Positive @NotNull(message = "you need to provide the User ID number as idNo") @Digits(integer = 15, fraction = 0) Long idNo,
             @Valid @RequestParam @Past @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthdate) {

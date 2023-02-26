@@ -10,5 +10,6 @@ public interface Common {
         String DELETE = "delete";
         String REPORT = "report";
         String UPDATE = "update";
+        String APPLICATION = "application";
     }
 }
