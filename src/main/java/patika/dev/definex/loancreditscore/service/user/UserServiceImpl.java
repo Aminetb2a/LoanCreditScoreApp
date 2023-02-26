@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByIdNoAndBirthDate(idNo, birthdate)
                 .orElseThrow(() -> new UserNotFoundException(idNo.toString()));
         // return credit score
-        return creditScoreMapper.mapToModel(user);
+        return creditScoreMapper.mapToCreditScore(user);
     }
 
     @Override

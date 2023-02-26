@@ -6,6 +6,13 @@ import patika.dev.definex.loancreditscore.model.user.User;
 
 @Component
 public class UserDTOMapper {
+    /**
+     * Method that takes a UserRequestDTO object and maps it to a UserDTO object
+     *
+     * @param userRequest The userRequestDTO object that is passed in from the controller.
+     * @return A UserDTO object
+     */
+
     public UserDTO mapToUserDTO(UserRequestDTO userRequest) {
         return new UserDTO()
                 .setId(userRequest.getId())
@@ -18,6 +25,12 @@ public class UserDTOMapper {
                 .setCollateralIdNo(userRequest.getCollateralIdNo());
     }
 
+    /**
+     * Method that takes a User object and maps it to a UserDTO object
+     *
+     * @param user The user object passed from service.
+     * @return A UserDTO object
+     */
     public UserDTO mapToUserDTO(User user) {
         return new UserDTO()
                 .setId(user.getId())
