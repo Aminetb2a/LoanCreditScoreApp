@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         // process user data -> return credit score
         CreditScore creditScore = creditScoreService.processCreditScore(userDTO);
         userDTO.setCreditLimit(creditScore.getLimit());
-        userDTO.setCreditStatus(creditScore.getStatus());
+        userDTO.setLoanStatus(creditScore.getStatus());
         //send sms to client
         Message smsStatus = smsService.sendSms(userDTO.getPhoneNumber(), smsGenerator.generateSms(userDTO));
         // handle  SMS service failure
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         // process the credit score with the new inputted data
         CreditScore creditScore = creditScoreService.processCreditScore(userDTO);
         userDTO.setCreditLimit(creditScore.getLimit());
-        userDTO.setCreditStatus(creditScore.getStatus());
+        userDTO.setLoanStatus(creditScore.getStatus());
         // update the user details
         User savedUser = userRepository.save(mapper.mapToUser(user, userDTO));
         // return updated user details

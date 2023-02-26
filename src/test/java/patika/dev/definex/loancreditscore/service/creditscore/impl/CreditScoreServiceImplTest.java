@@ -8,9 +8,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import patika.dev.definex.loancreditscore.dto.creditscore.CreditScore;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.service.creditscore.CreditLimitCalculatorService;
-import patika.dev.definex.loancreditscore.service.creditscore.CreditStatusService;
+import patika.dev.definex.loancreditscore.service.creditscore.LoanStatusService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,7 +30,7 @@ class CreditScoreServiceImplTest {
     private CreditScoreServiceImpl creditScoreServiceImpl;
 
     @MockBean
-    private CreditStatusService creditStatusService;
+    private LoanStatusService creditStatusService;
 
     /**
      * Method under test: {@link CreditScoreServiceImpl#processCreditScore(UserDTO)}
@@ -38,7 +38,7 @@ class CreditScoreServiceImplTest {
     @Test
     void testProcessCreditScore() {
         // Arrange
-        when(creditStatusService.getCreditStatus(any())).thenReturn(CreditStatus.APPROVED);
+        when(creditStatusService.getLoanStatus(any())).thenReturn(LoanStatus.APPROVED);
         when(creditLimitCalculatorService.getCreditLimit(any(), any())).thenReturn(10.0d);
 
         UserDTO userDTO = new UserDTO();
@@ -53,15 +53,15 @@ class CreditScoreServiceImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(13545264757L);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act
         CreditScore actualProcessCreditScoreResult = creditScoreServiceImpl.processCreditScore(userDTO);
 
         // Assert
         assertEquals(10.0d, actualProcessCreditScoreResult.getLimit().doubleValue());
-        assertEquals(CreditStatus.APPROVED, actualProcessCreditScoreResult.getStatus());
-        verify(creditStatusService).getCreditStatus(any());
+        assertEquals(LoanStatus.APPROVED, actualProcessCreditScoreResult.getStatus());
+        verify(creditStatusService).getLoanStatus(any());
         verify(creditLimitCalculatorService).getCreditLimit(any(), any());
     }
 
@@ -71,7 +71,7 @@ class CreditScoreServiceImplTest {
     @Test
     void testProcessCreditScore2() {
         // Arrange
-        when(creditStatusService.getCreditStatus(any())).thenReturn(CreditStatus.REJECTED);
+        when(creditStatusService.getLoanStatus(any())).thenReturn(LoanStatus.REJECTED);
         when(creditLimitCalculatorService.getCreditLimit(any(), any())).thenReturn(0.0d);
 
         UserDTO userDTO = new UserDTO();
@@ -86,15 +86,15 @@ class CreditScoreServiceImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(13545264757L);
-        userDTO.setCreditStatus(CreditStatus.REJECTED);
+        userDTO.setLoanStatus(LoanStatus.REJECTED);
 
         // Act
         CreditScore actualProcessCreditScoreResult = creditScoreServiceImpl.processCreditScore(userDTO);
 
         // Assert
         assertEquals(0.0d, actualProcessCreditScoreResult.getLimit().doubleValue());
-        assertEquals(CreditStatus.REJECTED, actualProcessCreditScoreResult.getStatus());
-        verify(creditStatusService).getCreditStatus(any());
+        assertEquals(LoanStatus.REJECTED, actualProcessCreditScoreResult.getStatus());
+        verify(creditStatusService).getLoanStatus(any());
     }
 }
 

@@ -7,8 +7,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
 import patika.dev.definex.loancreditscore.enums.IncomeCategory;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.service.collateral.CollateralService;
 import patika.dev.definex.loancreditscore.service.common.IncomeRangeService;
 
@@ -53,7 +53,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(null);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(10000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
@@ -83,7 +83,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(13545264757L);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(11000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
@@ -112,7 +112,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(null);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(20000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
@@ -142,7 +142,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(13545264757L);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(22000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
@@ -171,7 +171,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(null);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(30000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
@@ -201,7 +201,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(13545264757L);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(32500.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
@@ -229,7 +229,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(null);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(60000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 1500.0d).doubleValue());
@@ -256,7 +256,7 @@ class CreditLimitCalculatorImplTest {
         userDTO.setId("2864983jh354jn983k");
         userDTO.setPhoneNumber("+906625550144");
         userDTO.setCollateralIdNo(13545264757L);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
 
         // Act and Assert
         assertEquals(65000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 1500.0d).doubleValue());

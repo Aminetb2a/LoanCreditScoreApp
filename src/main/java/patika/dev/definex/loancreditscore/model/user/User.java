@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.model.BaseModel;
 
 import java.util.Date;
@@ -26,5 +26,5 @@ public class User extends BaseModel {
     private Double creditLimit;
     private String phoneNumber;
     private Long collateralIdNo;
-    private CreditStatus creditStatus;
+    private LoanStatus loanStatus;
 }

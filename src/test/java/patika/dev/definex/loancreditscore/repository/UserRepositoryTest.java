@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.model.user.User;
 
 import java.time.LocalDate;
@@ -39,7 +39,7 @@ class UserRepositoryTest {
         user.setBirthDate(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
         user.setCollateralIdNo(1L);
         user.setCreditLimit(10.0d);
-        user.setCreditStatus(CreditStatus.APPROVED);
+        user.setLoanStatus(LoanStatus.APPROVED);
         user.setId("42");
         user.setIdNo(1L);
         user.setIncome(10.0d);
@@ -75,7 +75,7 @@ class UserRepositoryTest {
         user.setBirthDate(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
         user.setCollateralIdNo(1L);
         user.setCreditLimit(10.0d);
-        user.setCreditStatus(CreditStatus.APPROVED);
+        user.setLoanStatus(LoanStatus.APPROVED);
         user.setId("42");
         user.setIdNo(1L);
         user.setIncome(10.0d);

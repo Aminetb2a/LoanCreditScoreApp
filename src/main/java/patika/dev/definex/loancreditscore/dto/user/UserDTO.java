@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 
 import java.util.Date;
 
@@ -25,5 +25,5 @@ public class UserDTO {
     private String phoneNumber;
     private Double creditLimit;
     private Long collateralIdNo;
-    private CreditStatus creditStatus;
+    private LoanStatus loanStatus;
 }

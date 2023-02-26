@@ -7,6 +7,6 @@ import patika.dev.definex.loancreditscore.dto.user.UserDTO;
 public class SmsGenerator {
     public String generateSms(UserDTO user) {
         return String.format("Thank you for applying to our loan Mr(s) %s.\n\nThe result of you application is %s with a limit of %s.\nPlease contact our customer services for more details.\n\nThank you!",
-                user.getSurname(), user.getCreditStatus().toString().toLowerCase(), user.getCreditLimit());
+                user.getSurname(), user.getLoanStatus().toString().toLowerCase(), user.getCreditLimit());
     }
 }

@@ -4,17 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import patika.dev.definex.loancreditscore.dto.creditscore.CreditScore;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.service.creditscore.CreditLimitCalculatorService;
 import patika.dev.definex.loancreditscore.service.creditscore.CreditScoreService;
-import patika.dev.definex.loancreditscore.service.creditscore.CreditStatusService;
+import patika.dev.definex.loancreditscore.service.creditscore.LoanStatusService;
 
 import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
 public class CreditScoreServiceImpl implements CreditScoreService {
-    private final CreditStatusService creditStatusService;
+    private final LoanStatusService creditStatusService;
     private final CreditLimitCalculatorService creditLimitCalculator;
 
     /**
@@ -26,8 +26,8 @@ public class CreditScoreServiceImpl implements CreditScoreService {
     @Override
     public CreditScore processCreditScore(UserDTO user) {
         Double creditScore = getCreditScore(user.getIdNo());
-        CreditStatus status = creditStatusService.getCreditStatus(creditScore);
-        Double limit = status.equals(CreditStatus.REJECTED)
+        LoanStatus status = creditStatusService.getLoanStatus(creditScore);
+        Double limit = status.equals(LoanStatus.REJECTED)
                 ? 0.0
                 : creditLimitCalculator.getCreditLimit(user, creditScore);
         return CreditScore.builder()

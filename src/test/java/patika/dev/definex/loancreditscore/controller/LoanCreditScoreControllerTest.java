@@ -19,7 +19,7 @@ import patika.dev.definex.loancreditscore.config.exception.UserNotFoundException
 import patika.dev.definex.loancreditscore.dto.creditscore.CreditScore;
 import patika.dev.definex.loancreditscore.dto.request.UserRequestDTO;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.service.user.UserService;
 
 import java.time.LocalDate;
@@ -61,7 +61,7 @@ class LoanCreditScoreControllerTest {
         // Arrange
         CreditScore creditScore = CreditScore.builder()
                 .limit(10.0d)
-                .status(CreditStatus.APPROVED)
+                .status(LoanStatus.APPROVED)
                 .build();
         when(userService.applyToLoan(any())).thenReturn(creditScore);
 
@@ -232,7 +232,7 @@ class LoanCreditScoreControllerTest {
         // Arrange
         CreditScore creditScore = CreditScore.builder()
                 .limit(10.0d)
-                .status(CreditStatus.APPROVED)
+                .status(LoanStatus.APPROVED)
                 .build();
         when(userService.getCreditScoreReport(any(), any())).thenReturn(creditScore);
 

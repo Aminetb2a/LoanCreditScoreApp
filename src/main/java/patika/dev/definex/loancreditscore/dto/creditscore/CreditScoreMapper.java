@@ -12,7 +12,7 @@ public class CreditScoreMapper {
     public CreditScore mapToCreditScore(User user) {
         return CreditScore.builder()
                 .limit(user.getCreditLimit())
-                .status(user.getCreditStatus())
+                .status(user.getLoanStatus())
                 .build();
     }
 }

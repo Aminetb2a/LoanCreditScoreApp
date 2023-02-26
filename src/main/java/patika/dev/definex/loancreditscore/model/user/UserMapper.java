@@ -19,7 +19,7 @@ public class UserMapper {
                 .setBirthDate(userDTO.getBirthDate())
                 .setPhoneNumber(userDTO.getPhoneNumber())
                 .setCreditLimit(userDTO.getCreditLimit())
-                .setCreditStatus(userDTO.getCreditStatus())
+                .setLoanStatus(userDTO.getLoanStatus())
                 .setCollateralIdNo(userDTO.getCollateralIdNo());
     }
 
@@ -38,7 +38,7 @@ public class UserMapper {
                 .setBirthDate(userDTO.getBirthDate())
                 .setPhoneNumber(userDTO.getPhoneNumber())
                 .setCreditLimit(userDTO.getCreditLimit())
-                .setCreditStatus(userDTO.getCreditStatus())
+                .setLoanStatus(userDTO.getLoanStatus())
                 .setCollateralIdNo(userDTO.getCollateralIdNo());
     }
 }

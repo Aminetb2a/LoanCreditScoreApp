@@ -11,7 +11,7 @@ import patika.dev.definex.loancreditscore.config.exception.UserFoundException;
 import patika.dev.definex.loancreditscore.config.exception.UserNotFoundException;
 import patika.dev.definex.loancreditscore.dto.creditscore.CreditScore;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
-import patika.dev.definex.loancreditscore.enums.CreditStatus;
+import patika.dev.definex.loancreditscore.enums.LoanStatus;
 import patika.dev.definex.loancreditscore.model.user.User;
 import patika.dev.definex.loancreditscore.repository.UserRepository;
 import patika.dev.definex.loancreditscore.service.creditscore.CreditScoreService;
@@ -64,7 +64,7 @@ class UserServiceImplIntegrationTest {
         user.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         user.setCollateralIdNo(1L);
         user.setCreditLimit(10.0d);
-        user.setCreditStatus(CreditStatus.APPROVED);
+        user.setLoanStatus(LoanStatus.APPROVED);
         user.setId("42");
         user.setIdNo(1L);
         user.setIncome(10.0d);
@@ -81,7 +81,7 @@ class UserServiceImplIntegrationTest {
 
         // Assert
         assertEquals(10.0d, actualCreditScoreReport.getLimit().doubleValue());
-        assertEquals(CreditStatus.APPROVED, actualCreditScoreReport.getStatus());
+        assertEquals(LoanStatus.APPROVED, actualCreditScoreReport.getStatus());
         verify(dateFormatter).getFormattedDate(any());
         verify(userRepository).findByIdNoAndBirthDate(any(), any());
     }
@@ -164,7 +164,7 @@ class UserServiceImplIntegrationTest {
         userDTO.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         userDTO.setCollateralIdNo(1L);
         userDTO.setCreditLimit(10.0d);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
         userDTO.setIdNo(1L);
         userDTO.setIncome(10.0d);
         userDTO.setName("Name");
@@ -175,7 +175,7 @@ class UserServiceImplIntegrationTest {
         user.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         user.setCollateralIdNo(userDTO.getCollateralIdNo());
         user.setCreditLimit(userDTO.getCreditLimit());
-        user.setCreditStatus(userDTO.getCreditStatus());
+        user.setLoanStatus(userDTO.getLoanStatus());
         user.setIdNo(userDTO.getIdNo());
         user.setIncome(userDTO.getIncome());
         user.setName(userDTO.getName());
@@ -187,7 +187,7 @@ class UserServiceImplIntegrationTest {
         when(userRepository.findByIdNo(any())).thenReturn(Optional.empty());
         CreditScore creditScore = mock(CreditScore.class);
         when(creditScore.getLimit()).thenReturn(10.0d);
-        when(creditScore.getStatus()).thenReturn(CreditStatus.APPROVED);
+        when(creditScore.getStatus()).thenReturn(LoanStatus.APPROVED);
         when(creditScoreService.processCreditScore(any())).thenReturn(creditScore);
 
         // Act
@@ -202,7 +202,7 @@ class UserServiceImplIntegrationTest {
         verify(creditScore).getLimit();
         verify(creditScore).getStatus();
         assertNull(userDTO.getSmsId());
-        assertEquals(CreditStatus.APPROVED, userDTO.getCreditStatus());
+        assertEquals(LoanStatus.APPROVED, userDTO.getLoanStatus());
         assertEquals(10.0d, userDTO.getCreditLimit().doubleValue());
     }
 
@@ -218,7 +218,7 @@ class UserServiceImplIntegrationTest {
         userDTO.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         userDTO.setCollateralIdNo(1L);
         userDTO.setCreditLimit(10.0d);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
         userDTO.setIdNo(1L);
         userDTO.setIncome(10.0d);
         userDTO.setName("Name");
@@ -252,7 +252,7 @@ class UserServiceImplIntegrationTest {
         userDTO.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         userDTO.setCollateralIdNo(1L);
         userDTO.setCreditLimit(10.0d);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
         userDTO.setId("42");
         userDTO.setIdNo(1L);
         userDTO.setIncome(10.0d);
@@ -264,7 +264,7 @@ class UserServiceImplIntegrationTest {
         user.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         user.setCollateralIdNo(userDTO.getCollateralIdNo());
         user.setCreditLimit(userDTO.getCreditLimit());
-        user.setCreditStatus(userDTO.getCreditStatus());
+        user.setLoanStatus(userDTO.getLoanStatus());
         user.setId(userDTO.getId());
         user.setIdNo(userDTO.getIdNo());
         user.setIncome(userDTO.getIncome());
@@ -279,7 +279,7 @@ class UserServiceImplIntegrationTest {
         when(userRepository.findById(any())).thenReturn(ofResult);
         CreditScore creditScore = mock(CreditScore.class);
         when(creditScore.getLimit()).thenReturn(10.0d);
-        when(creditScore.getStatus()).thenReturn(CreditStatus.APPROVED);
+        when(creditScore.getStatus()).thenReturn(LoanStatus.APPROVED);
         when(creditScoreService.processCreditScore(any())).thenReturn(creditScore);
 
         // Act
@@ -298,7 +298,7 @@ class UserServiceImplIntegrationTest {
         verify(creditScoreService).processCreditScore(any());
         verify(creditScore).getLimit();
         verify(creditScore).getStatus();
-        assertEquals(CreditStatus.APPROVED, userDTO.getCreditStatus());
+        assertEquals(LoanStatus.APPROVED, userDTO.getLoanStatus());
         assertEquals(10.0d, userDTO.getCreditLimit().doubleValue());
     }
 
@@ -313,7 +313,7 @@ class UserServiceImplIntegrationTest {
         userDTO.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         userDTO.setCollateralIdNo(1L);
         userDTO.setCreditLimit(10.0d);
-        userDTO.setCreditStatus(CreditStatus.APPROVED);
+        userDTO.setLoanStatus(LoanStatus.APPROVED);
         userDTO.setId("42");
         userDTO.setIdNo(1L);
         userDTO.setIncome(10.0d);
@@ -339,7 +339,7 @@ class UserServiceImplIntegrationTest {
         User user = new User();
         user.setCollateralIdNo(1L);
         user.setCreditLimit(10.0d);
-        user.setCreditStatus(CreditStatus.APPROVED);
+        user.setLoanStatus(LoanStatus.APPROVED);
         user.setId("42");
         user.setIdNo(1L);
         user.setIncome(10.0d);
