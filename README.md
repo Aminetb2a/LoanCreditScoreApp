@@ -1,4 +1,4 @@
-# Patika.dev / DefineX Java Spring Practicum Final Case Content
+# Patika.dev / DefineX Java Spring Practicum Final Case Content 📚
 
 This is the Final Case test application of
 the [DefineX Java Spring Practicum](https://cohorts.patika.dev/cohortDetails/definex-java-spring-practicum/events)
@@ -84,7 +84,7 @@ And it uses an SMS service (Twilio) that you need to assign your username, passw
 
 ### Documentation
 
-You need to check the [documentation] (http://localhost:8080/swagger-ui/index.html) to be able to use this application
+You need to check the [documentation](http://localhost:8080/swagger-ui/index.html) to be able to use this application
 API correctly.
 
 ![Application Documentation](src/main/assests/Loan Credit Application.png?raw=true "Loan Application Documentation")
