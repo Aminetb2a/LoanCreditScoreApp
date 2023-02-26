@@ -16,7 +16,7 @@ import patika.dev.definex.loancreditscore.dto.creditscore.CreditScore;
 import patika.dev.definex.loancreditscore.dto.request.UserRequestDTO;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
 import patika.dev.definex.loancreditscore.dto.user.UserDTOMapper;
-import patika.dev.definex.loancreditscore.service.user.UserServiceImpl;
+import patika.dev.definex.loancreditscore.service.user.UserService;
 
 import java.time.LocalDate;
 
@@ -26,9 +26,10 @@ import static patika.dev.definex.loancreditscore.constant.Common.Path.*;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(SLASH + API + SLASH + LOAN)
+@RequestMapping(API + SLASH + LOAN)
 public class LoanCreditScoreController {
-    private final UserServiceImpl userService;
+    private static final UserDTOMapper userDTOMapper = new UserDTOMapper();
+    private final UserService userService;
 
     @Operation(summary = "Apply for loan")
     @ApiResponses(value = {
@@ -52,7 +53,7 @@ public class LoanCreditScoreController {
                     content = @Content)})
     @PutMapping(USER + SLASH + UPDATE)
     public UserDTO updateUser(@Valid @RequestBody UserRequestDTO userRequest) {
-        return userService.updateUser(new UserDTOMapper().mapToUserDTO(userRequest));
+        return userService.updateUser(userDTOMapper.mapToUserDTO(userRequest));
     }
 
     @Operation(summary = "Delete User")
