@@ -21,6 +21,7 @@ import patika.dev.definex.loancreditscore.service.utils.DateFormatter;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -55,9 +56,13 @@ public class UserServiceImpl implements UserService {
         userDTO.setCreditStatus(creditScore.getStatus());
         //send sms to client
         Message smsStatus = smsService.sendSms(userDTO.getPhoneNumber(), smsGenerator.generateSms(userDTO));
-        userDTO.setSmsId(smsStatus.getSid());
-        // save records to db
+        // handle  SMS service failure
+        Optional.ofNullable(smsStatus)
+                .map(Message::getSid)
+                .ifPresent(userDTO::setSmsId);
+        // save user records to db
         userRepository.save(mapper.mapToUser(userDTO));
+        // return credit score
         return creditScore;
     }
 
