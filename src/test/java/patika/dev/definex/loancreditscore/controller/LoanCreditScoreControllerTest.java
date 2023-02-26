@@ -94,7 +94,6 @@ class LoanCreditScoreControllerTest {
     @Test
     void shouldNotAddDuplicateUser() throws Exception {
         // Arrange
-        when(userService.applyToLoan(any())).thenThrow(new UserFoundException());
 
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         LocalDateTime birthDate = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -106,9 +105,11 @@ class LoanCreditScoreControllerTest {
         userRequestDTO.setPhoneNumber("+905662550144");
         userRequestDTO.setSurname("Doe");
 
+        when(userService.applyToLoan(any())).thenThrow(new UserFoundException(userRequestDTO.getIdNo().toString()));
+
         // Act & Assert
         mvc.perform(MockMvcRequestBuilders
-                        .post("/api/loan/user/apply")
+                        .post("/api/loan/apply")
                         .content(objectMapper.writeValueAsString(userRequestDTO))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -124,7 +125,7 @@ class LoanCreditScoreControllerTest {
     void testApplyToLoanWithEmptyPayload() throws Exception {
         // Arrange & Act & Assert
         mvc.perform(MockMvcRequestBuilders
-                        .post("/api/loan/user/apply")
+                        .post("/api/loan/apply")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());

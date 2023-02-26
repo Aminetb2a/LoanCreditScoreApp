@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public CreditScore applyToLoan(UserDTO userDTO) {
         // check if user with idNo exists
         if (userRepository.findByIdNo(userDTO.getIdNo()).isPresent())
-            throw new UserFoundException();
+            throw new UserFoundException(userDTO.getIdNo().toString());
         // process user data -> return credit score
         CreditScore creditScore = creditScoreService.processCreditScore(userDTO);
         userDTO.setCreditLimit(creditScore.getLimit());
