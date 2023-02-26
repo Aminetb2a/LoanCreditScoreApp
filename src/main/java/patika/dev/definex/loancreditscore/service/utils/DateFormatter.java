@@ -11,6 +11,13 @@ import java.util.TimeZone;
 
 @Component
 public class DateFormatter {
+    /**
+     * Method that formats localDate to Date with a iso date time format.
+     *
+     * @param date date
+     * @return formatted date
+     * @throws ParseException
+     */
     public Date getFormattedDate(LocalDate date) throws ParseException {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
