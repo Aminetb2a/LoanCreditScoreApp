@@ -80,7 +80,8 @@ public class UserServiceImpl implements UserService {
         userDTO.setCreditStatus(creditScore.getStatus());
         // update the user details
         User savedUser = userRepository.save(mapper.mapToUser(user, userDTO));
-        return mapperDTO.mapToModel(savedUser);
+        // return updated user details
+        return mapperDTO.mapToUserDTO(savedUser);
     }
 
     @Override

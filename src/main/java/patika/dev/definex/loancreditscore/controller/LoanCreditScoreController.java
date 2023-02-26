@@ -40,7 +40,7 @@ public class LoanCreditScoreController {
     @PostMapping(USER + SLASH + APPLY)
     @ResponseStatus(HttpStatus.CREATED)
     public CreditScore applyToLoan(@Valid @RequestBody UserRequestDTO userRequest) {
-        return userService.applyToLoan(new UserDTOMapper().mapToModel(userRequest));
+        return userService.applyToLoan(new UserDTOMapper().mapToUserDTO(userRequest));
     }
 
     @Operation(summary = "Update User")
@@ -52,7 +52,7 @@ public class LoanCreditScoreController {
                     content = @Content)})
     @PutMapping(USER + SLASH + UPDATE)
     public UserDTO updateUser(@Valid @RequestBody UserRequestDTO userRequest) {
-        return userService.updateUser(new UserDTOMapper().mapToModel(userRequest));
+        return userService.updateUser(new UserDTOMapper().mapToUserDTO(userRequest));
     }
 
     @Operation(summary = "Delete User")

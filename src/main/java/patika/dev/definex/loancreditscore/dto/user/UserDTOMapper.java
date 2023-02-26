@@ -1,10 +1,12 @@
 package patika.dev.definex.loancreditscore.dto.user;
 
+import org.springframework.stereotype.Component;
 import patika.dev.definex.loancreditscore.dto.request.UserRequestDTO;
 import patika.dev.definex.loancreditscore.model.user.User;
 
+@Component
 public class UserDTOMapper {
-    public UserDTO mapToModel(UserRequestDTO userRequest) {
+    public UserDTO mapToUserDTO(UserRequestDTO userRequest) {
         return new UserDTO()
                 .setId(userRequest.getId())
                 .setIdNo(userRequest.getIdNo())
@@ -16,7 +18,7 @@ public class UserDTOMapper {
                 .setCollateralIdNo(userRequest.getCollateralIdNo());
     }
 
-    public UserDTO mapToModel(User user) {
+    public UserDTO mapToUserDTO(User user) {
         return new UserDTO()
                 .setId(user.getId())
                 .setIdNo(user.getIdNo())
