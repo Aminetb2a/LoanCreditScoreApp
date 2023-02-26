@@ -36,6 +36,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CreditScoreService creditScoreService;
 
+    /**
+     * Method that returns the loan application report using user's ID number
+     * and birth date
+     *
+     * @param idNo      user's ID number
+     * @param birthDate user's birth date
+     * @return loan application report
+     */
     @SneakyThrows
     @Override
     public CreditScore getCreditScoreReport(Long idNo, LocalDate birthDate) {
@@ -48,6 +56,12 @@ public class UserServiceImpl implements UserService {
         return creditScoreMapper.mapToCreditScore(user);
     }
 
+    /**
+     * Method that handles the loan application process
+     *
+     * @param userDTO user's information
+     * @return loan application status
+     */
     @Override
     public CreditScore applyToLoan(UserDTO userDTO) {
         // check if user with idNo exists
@@ -69,6 +83,12 @@ public class UserServiceImpl implements UserService {
         return creditScore;
     }
 
+    /**
+     * Method that updates user's details
+     *
+     * @param userDTO user's updated information
+     * @return updated user's details
+     */
     @Override
     public UserDTO updateUser(UserDTO userDTO) {
         // check if user exists
@@ -84,6 +104,11 @@ public class UserServiceImpl implements UserService {
         return mapperDTO.mapToUserDTO(savedUser);
     }
 
+    /**
+     * Method that deletes user from db using user's id
+     *
+     * @param id user's db id
+     */
     @Override
     public void deleteUser(String id) {
         //check if user with id exists
