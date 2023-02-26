@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import patika.dev.definex.loancreditscore.constant.CreditScoreConstant;
 import patika.dev.definex.loancreditscore.constant.CreditScoreConstant.CreditScore;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
-import patika.dev.definex.loancreditscore.enums.Operator;
+import patika.dev.definex.loancreditscore.enums.IncomeCategory;
 import patika.dev.definex.loancreditscore.service.collateral.CollateralService;
 import patika.dev.definex.loancreditscore.service.common.IncomeRangeService;
 import patika.dev.definex.loancreditscore.service.creditscore.CreditLimitCalculatorService;
@@ -26,10 +26,10 @@ public class CreditLimitCalculatorImpl implements CreditLimitCalculatorService {
             double limit = user.getIncome() * CREDIT_LIMIT_MULTIPLIER;
             return guaranteeAmount != null ? limit + (guaranteeAmount * CreditScoreConstant.Extra.HIGHER) : limit;
         } else
-            return getLimit(user.getIncome(), guaranteeAmount, incomeRangeService.getIncomeRange(user.getIncome()));
+            return getCreditLimit(user.getIncome(), guaranteeAmount, incomeRangeService.getIncomeCategory(user.getIncome()));
     }
 
-    private Double getLimit(Double income, Double guaranteeAmount, Operator operator) {
-        return operator.apply(income, guaranteeAmount);
+    private Double getCreditLimit(Double income, Double guaranteeAmount, IncomeCategory incomeCategory) {
+        return incomeCategory.getCreditLimit(income, guaranteeAmount);
     }
 }

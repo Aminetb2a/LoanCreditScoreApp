@@ -1,7 +1,7 @@
 package patika.dev.definex.loancreditscore.service.common;
 
-import patika.dev.definex.loancreditscore.enums.Operator;
+import patika.dev.definex.loancreditscore.enums.IncomeCategory;
 
 public interface IncomeRangeService {
-    Operator getIncomeRange(Double income);
+    IncomeCategory getIncomeCategory(Double income);
 }

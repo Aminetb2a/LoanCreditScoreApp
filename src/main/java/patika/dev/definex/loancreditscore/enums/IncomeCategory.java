@@ -6,14 +6,14 @@ import patika.dev.definex.loancreditscore.constant.CreditScoreConstant.Limit;
 import static patika.dev.definex.loancreditscore.constant.CreditScoreConstant.CreditLimitMultiplier.CREDIT_LIMIT_MULTIPLIER;
 
 /**
- * The Operator enum handles the credit limit calculation
+ * The IncomeCategory enum handles the credit limit calculation
  * for each type of client depending on their income range
  */
-public enum Operator {
+public enum IncomeCategory {
 
     LOW {
         @Override
-        public Double apply(Double income, Double guaranteeAmount) {
+        public Double getCreditLimit(Double income, Double guaranteeAmount) {
             return guaranteeAmount != null ? Limit.LOW + (guaranteeAmount * Extra.LOW) : Limit.LOW;
         }
     },
@@ -21,7 +21,7 @@ public enum Operator {
 
     MEDIUM {
         @Override
-        public Double apply(Double income, Double guaranteeAmount) {
+        public Double getCreditLimit(Double income, Double guaranteeAmount) {
             return guaranteeAmount != null ? Limit.MEDIUM + (guaranteeAmount * Extra.MEDIUM) : Limit.MEDIUM;
         }
     },
@@ -29,11 +29,19 @@ public enum Operator {
 
     HIGH {
         @Override
-        public Double apply(Double income, Double guaranteeAmount) {
+        public Double getCreditLimit(Double income, Double guaranteeAmount) {
             Double limit = income * (CREDIT_LIMIT_MULTIPLIER / 2);
             return guaranteeAmount != null ? limit + (guaranteeAmount * Extra.HIGH) : limit;
         }
     };
 
-    public abstract Double apply(Double income, Double guaranteeAmount);
+    /**
+     * Method that calculates the client's credit limit depending on his/her income
+     * and guarantee amount if provided
+     *
+     * @param income
+     * @param guaranteeAmount
+     * @return Double
+     */
+    public abstract Double getCreditLimit(Double income, Double guaranteeAmount);
 }

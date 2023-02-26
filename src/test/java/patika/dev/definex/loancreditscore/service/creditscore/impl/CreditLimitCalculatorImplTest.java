@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import patika.dev.definex.loancreditscore.dto.user.UserDTO;
 import patika.dev.definex.loancreditscore.enums.CreditStatus;
-import patika.dev.definex.loancreditscore.enums.Operator;
+import patika.dev.definex.loancreditscore.enums.IncomeCategory;
 import patika.dev.definex.loancreditscore.service.collateral.CollateralService;
 import patika.dev.definex.loancreditscore.service.common.IncomeRangeService;
 
@@ -39,7 +39,7 @@ class CreditLimitCalculatorImplTest {
     void testGetCreditLimitLow() {
         // Arrange
         when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
-        when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.LOW);
+        when(incomeRangeService.getIncomeCategory(any())).thenReturn(IncomeCategory.LOW);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -58,7 +58,7 @@ class CreditLimitCalculatorImplTest {
         // Act and Assert
         assertEquals(10000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
         verify(collateralService).getGuaranteeAmount(any());
-        verify(incomeRangeService).getIncomeRange(any());
+        verify(incomeRangeService).getIncomeCategory(any());
     }
 
 
@@ -69,7 +69,7 @@ class CreditLimitCalculatorImplTest {
     void testGetCreditLimitLowWithCollateral() {
         // Arrange
         when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
-        when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.LOW);
+        when(incomeRangeService.getIncomeCategory(any())).thenReturn(IncomeCategory.LOW);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -88,7 +88,7 @@ class CreditLimitCalculatorImplTest {
         // Act and Assert
         assertEquals(11000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
         verify(collateralService).getGuaranteeAmount(any());
-        verify(incomeRangeService).getIncomeRange(any());
+        verify(incomeRangeService).getIncomeCategory(any());
     }
 
     /**
@@ -98,7 +98,7 @@ class CreditLimitCalculatorImplTest {
     void testGetCreditLimitMedium() {
         // Arrange
         when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
-        when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.MEDIUM);
+        when(incomeRangeService.getIncomeCategory(any())).thenReturn(IncomeCategory.MEDIUM);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -117,7 +117,7 @@ class CreditLimitCalculatorImplTest {
         // Act and Assert
         assertEquals(20000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
         verify(collateralService).getGuaranteeAmount(any());
-        verify(incomeRangeService).getIncomeRange(any());
+        verify(incomeRangeService).getIncomeCategory(any());
     }
 
 
@@ -128,7 +128,7 @@ class CreditLimitCalculatorImplTest {
     void testGetCreditLimitMediumWithCollateral() {
         // Arrange
         when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
-        when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.MEDIUM);
+        when(incomeRangeService.getIncomeCategory(any())).thenReturn(IncomeCategory.MEDIUM);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -147,7 +147,7 @@ class CreditLimitCalculatorImplTest {
         // Act and Assert
         assertEquals(22000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
         verify(collateralService).getGuaranteeAmount(any());
-        verify(incomeRangeService).getIncomeRange(any());
+        verify(incomeRangeService).getIncomeCategory(any());
     }
 
     /**
@@ -157,7 +157,7 @@ class CreditLimitCalculatorImplTest {
     void testGetCreditLimitHigh() {
         // Arrange
         when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
-        when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.HIGH);
+        when(incomeRangeService.getIncomeCategory(any())).thenReturn(IncomeCategory.HIGH);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -176,7 +176,7 @@ class CreditLimitCalculatorImplTest {
         // Act and Assert
         assertEquals(30000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
         verify(collateralService).getGuaranteeAmount(any());
-        verify(incomeRangeService).getIncomeRange(any());
+        verify(incomeRangeService).getIncomeCategory(any());
     }
 
 
@@ -187,7 +187,7 @@ class CreditLimitCalculatorImplTest {
     void testGetCreditLimitHighWithCollateral() {
         // Arrange
         when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
-        when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.HIGH);
+        when(incomeRangeService.getIncomeCategory(any())).thenReturn(IncomeCategory.HIGH);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -206,7 +206,7 @@ class CreditLimitCalculatorImplTest {
         // Act and Assert
         assertEquals(32500.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
         verify(collateralService).getGuaranteeAmount(any());
-        verify(incomeRangeService).getIncomeRange(any());
+        verify(incomeRangeService).getIncomeCategory(any());
     }
 
     /**
