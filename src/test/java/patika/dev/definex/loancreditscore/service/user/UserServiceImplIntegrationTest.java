@@ -56,13 +56,12 @@ class UserServiceImplIntegrationTest {
     @Test
     void testSuccessfulGetCreditScoreReport() throws ParseException {
         // Arrange
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
+        LocalDateTime birthDate = LocalDate.of(1970, 1, 1).atStartOfDay();
         when(dateFormatter.getFormattedDate(any()))
-                .thenReturn(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+                .thenReturn(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
 
         User user = new User();
-        LocalDateTime atStartOfDayResult1 = LocalDate.of(1970, 1, 1).atStartOfDay();
-        user.setBirthDate(Date.from(atStartOfDayResult1.atZone(ZoneId.of("UTC")).toInstant()));
+        user.setBirthDate(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         user.setCollateralIdNo(1L);
         user.setCreditLimit(10.0d);
         user.setCreditStatus(CreditStatus.APPROVED);
@@ -93,9 +92,9 @@ class UserServiceImplIntegrationTest {
     @Test
     void testGetCreditScoreReportUserNotFoundException() throws ParseException {
         // Arrange
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
+        LocalDateTime birthDate = LocalDate.of(1970, 1, 1).atStartOfDay();
         when(dateFormatter.getFormattedDate(any()))
-                .thenReturn(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+                .thenReturn(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         when(userRepository.findByIdNoAndBirthDate(any(), any())).thenThrow(new UserNotFoundException("User not found"));
 
         // Act and Assert
@@ -111,9 +110,9 @@ class UserServiceImplIntegrationTest {
     @Test
     void testGetCreditScoreReportWithWrongUserDetails() throws ParseException {
         // Arrange
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
+        LocalDateTime birthDate = LocalDate.of(1970, 1, 1).atStartOfDay();
         when(dateFormatter.getFormattedDate(any()))
-                .thenReturn(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+                .thenReturn(Date.from(birthDate.atZone(ZoneId.of("UTC")).toInstant()));
         when(userRepository.findByIdNoAndBirthDate(any(), any())).thenReturn(Optional.empty());
 
         // Act and Assert
