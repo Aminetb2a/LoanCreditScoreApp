@@ -15,6 +15,15 @@ import java.util.Optional;
 
 @Configuration
 public class OpenApiOperationCustomizer implements OperationCustomizer {
+    /**
+     * For each response that starts with a 2 (isSuccess()), get the customized schema
+     * that wraps the available schema in the result object, and add success field to it
+     * to match the BaseResponse Object
+     *
+     * @param operation     The operation to customize.
+     * @param handlerMethod The method that is being documented.
+     * @return The operation is being returned.
+     */
     @Override
     public Operation customize(Operation operation, HandlerMethod handlerMethod) {
         final io.swagger.v3.oas.models.responses.ApiResponses responses = operation.getResponses();
@@ -34,10 +43,17 @@ public class OpenApiOperationCustomizer implements OperationCustomizer {
         return operation;
     }
 
+    /**
+     * Method that takes a schema and returns a new schema that wraps the original schema in a new object with
+     * two properties: `success` and `result`
+     *
+     * @param objSchema The schema of the object that you want to wrap.
+     * @return A schema object that contains the schema of the object being returned.
+     */
     private Schema<?> customizeSchema(final Schema<?> objSchema) {
         final Schema<?> wrapperSchema = new Schema<>();
-        wrapperSchema.addProperties("success", new BooleanSchema()._default(true));
-        wrapperSchema.addProperties("result", objSchema);
+        wrapperSchema.addProperty("success", new BooleanSchema()._default(true));
+        wrapperSchema.addProperty("result", objSchema);
         return wrapperSchema;
     }
 }
