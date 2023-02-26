@@ -43,7 +43,7 @@ public class CreditLimitCalculatorImpl implements CreditLimitCalculatorService {
      * @param income          user's monthly income
      * @param guaranteeAmount user's guarantee value
      * @param incomeCategory  user's income range
-     * @return
+     * @return Double
      */
     private Double getCreditLimit(Double income, Double guaranteeAmount, IncomeCategory incomeCategory) {
         return incomeCategory.getCreditLimit(income, guaranteeAmount);

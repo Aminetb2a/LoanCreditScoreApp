@@ -17,6 +17,12 @@ public class CreditScoreServiceImpl implements CreditScoreService {
     private final CreditStatusService creditStatusService;
     private final CreditLimitCalculatorService creditLimitCalculator;
 
+    /**
+     * Method that returns the credit status and limit
+     *
+     * @param user
+     * @return
+     */
     @Override
     public CreditScore processCreditScore(UserDTO user) {
         Double creditScore = getCreditScore(user.getIdNo());
@@ -30,6 +36,12 @@ public class CreditScoreServiceImpl implements CreditScoreService {
                 .build();
     }
 
+    /**
+     * Method returns random credit score
+     *
+     * @param idNo
+     * @return Double
+     */
     private Double getCreditScore(Long idNo) {
         return new Random().nextDouble(0.0, 1100.0);
     }
