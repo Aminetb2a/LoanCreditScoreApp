@@ -21,15 +21,15 @@ public class CreditLimitCalculatorImpl implements CreditLimitCalculatorService {
 
     @Override
     public Double getCreditLimit(UserDTO user, Double creditScore) {
-        Double collateralValue = collateralService.getCollateralValue(user.getCollateralIdNo());
+        Double guaranteeAmount = collateralService.getGuaranteeAmount(user.getCollateralIdNo());
         if (creditScore > CreditScore.HIGH) {
             double limit = user.getIncome() * CREDIT_LIMIT_MULTIPLIER;
-            return collateralValue != null ? limit + (collateralValue * CreditScoreConstant.Extra.HIGHER) : limit;
+            return guaranteeAmount != null ? limit + (guaranteeAmount * CreditScoreConstant.Extra.HIGHER) : limit;
         } else
-            return getLimit(user.getIncome(), collateralValue, incomeRangeService.getIncomeRange(user.getIncome()));
+            return getLimit(user.getIncome(), guaranteeAmount, incomeRangeService.getIncomeRange(user.getIncome()));
     }
 
-    private Double getLimit(Double income, Double collateralValue, Operator operator) {
-        return operator.apply(income, collateralValue);
+    private Double getLimit(Double income, Double guaranteeAmount, Operator operator) {
+        return operator.apply(income, guaranteeAmount);
     }
 }

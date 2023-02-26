@@ -16,32 +16,32 @@ class CollateralServiceImplTest {
     private CollateralServiceImpl collateralServiceImpl;
 
     /**
-     * Method under test: {@link CollateralServiceImpl#getCollateralValue(Long)}
+     * Method under test: {@link CollateralServiceImpl#getGuaranteeAmount(Long)}
      */
     @Test
     void testGetCollateralRandomValue() {
         // TODO: Complete this test when service available
 
         // Arrange and Act
-        collateralServiceImpl.getCollateralValue(10000L);
+        collateralServiceImpl.getGuaranteeAmount(10000L);
     }
 
     /**
-     * Method under test: {@link CollateralServiceImpl#getCollateralValue(Long)}
+     * Method under test: {@link CollateralServiceImpl#getGuaranteeAmount(Long)}
      */
     @Test
     void testGetCollateralNullValue() {
         // Arrange, Act and Assert
-        assertNull(collateralServiceImpl.getCollateralValue(null));
+        assertNull(collateralServiceImpl.getGuaranteeAmount(null));
     }
 
     /**
-     * Method under test: {@link CollateralServiceImpl#getCollateralValue(Long)}
+     * Method under test: {@link CollateralServiceImpl#getGuaranteeAmount(Long)}
      */
     @Test
     void testGetCollateralFixedValue() {
         // Arrange, Act and Assert
-        assertEquals(10000.0d, collateralServiceImpl.getCollateralValue(1L).doubleValue());
+        assertEquals(10000.0d, collateralServiceImpl.getGuaranteeAmount(1L).doubleValue());
     }
 }
 

@@ -38,7 +38,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitLow() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(null);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
         when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.LOW);
 
         UserDTO userDTO = new UserDTO();
@@ -57,7 +57,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(10000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
-        verify(collateralService).getCollateralValue(any());
+        verify(collateralService).getGuaranteeAmount(any());
         verify(incomeRangeService).getIncomeRange(any());
     }
 
@@ -68,7 +68,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitLowWithCollateral() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(10000.0d);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
         when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.LOW);
 
         UserDTO userDTO = new UserDTO();
@@ -87,7 +87,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(11000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
-        verify(collateralService).getCollateralValue(any());
+        verify(collateralService).getGuaranteeAmount(any());
         verify(incomeRangeService).getIncomeRange(any());
     }
 
@@ -97,7 +97,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitMedium() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(null);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
         when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.MEDIUM);
 
         UserDTO userDTO = new UserDTO();
@@ -116,7 +116,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(20000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
-        verify(collateralService).getCollateralValue(any());
+        verify(collateralService).getGuaranteeAmount(any());
         verify(incomeRangeService).getIncomeRange(any());
     }
 
@@ -127,7 +127,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitMediumWithCollateral() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(10000.0d);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
         when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.MEDIUM);
 
         UserDTO userDTO = new UserDTO();
@@ -146,7 +146,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(22000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
-        verify(collateralService).getCollateralValue(any());
+        verify(collateralService).getGuaranteeAmount(any());
         verify(incomeRangeService).getIncomeRange(any());
     }
 
@@ -156,7 +156,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitHigh() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(null);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
         when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.HIGH);
 
         UserDTO userDTO = new UserDTO();
@@ -175,7 +175,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(30000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
-        verify(collateralService).getCollateralValue(any());
+        verify(collateralService).getGuaranteeAmount(any());
         verify(incomeRangeService).getIncomeRange(any());
     }
 
@@ -186,7 +186,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitHighWithCollateral() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(10000.0d);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
         when(incomeRangeService.getIncomeRange(any())).thenReturn(Operator.HIGH);
 
         UserDTO userDTO = new UserDTO();
@@ -205,7 +205,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(32500.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 510.0d).doubleValue());
-        verify(collateralService).getCollateralValue(any());
+        verify(collateralService).getGuaranteeAmount(any());
         verify(incomeRangeService).getIncomeRange(any());
     }
 
@@ -215,7 +215,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitHigher() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(null);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(null);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -233,7 +233,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(60000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 1500.0d).doubleValue());
-        verify(collateralService).getCollateralValue(userDTO.getCollateralIdNo());
+        verify(collateralService).getGuaranteeAmount(userDTO.getCollateralIdNo());
     }
 
     /**
@@ -242,7 +242,7 @@ class CreditLimitCalculatorImplTest {
     @Test
     void testGetCreditLimitHigherWithCollateral() {
         // Arrange
-        when(collateralService.getCollateralValue(any())).thenReturn(10000.0d);
+        when(collateralService.getGuaranteeAmount(any())).thenReturn(10000.0d);
 
         UserDTO userDTO = new UserDTO();
         LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
@@ -260,7 +260,7 @@ class CreditLimitCalculatorImplTest {
 
         // Act and Assert
         assertEquals(65000.0d, creditLimitCalculatorImpl.getCreditLimit(userDTO, 1500.0d).doubleValue());
-        verify(collateralService).getCollateralValue(userDTO.getCollateralIdNo());
+        verify(collateralService).getGuaranteeAmount(userDTO.getCollateralIdNo());
     }
 }
 

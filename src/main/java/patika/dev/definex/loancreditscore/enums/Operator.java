@@ -13,27 +13,27 @@ public enum Operator {
 
     LOW {
         @Override
-        public Double apply(Double income, Double collateralValue) {
-            return collateralValue != null ? Limit.LOW + (collateralValue * Extra.LOW) : Limit.LOW;
+        public Double apply(Double income, Double guaranteeAmount) {
+            return guaranteeAmount != null ? Limit.LOW + (guaranteeAmount * Extra.LOW) : Limit.LOW;
         }
     },
 
 
     MEDIUM {
         @Override
-        public Double apply(Double income, Double collateralValue) {
-            return collateralValue != null ? Limit.MEDIUM + (collateralValue * Extra.MEDIUM) : Limit.MEDIUM;
+        public Double apply(Double income, Double guaranteeAmount) {
+            return guaranteeAmount != null ? Limit.MEDIUM + (guaranteeAmount * Extra.MEDIUM) : Limit.MEDIUM;
         }
     },
 
 
     HIGH {
         @Override
-        public Double apply(Double income, Double collateralValue) {
+        public Double apply(Double income, Double guaranteeAmount) {
             Double limit = income * (CREDIT_LIMIT_MULTIPLIER / 2);
-            return collateralValue != null ? limit + (collateralValue * Extra.HIGH) : limit;
+            return guaranteeAmount != null ? limit + (guaranteeAmount * Extra.HIGH) : limit;
         }
     };
 
-    public abstract Double apply(Double income, Double collateralValue);
+    public abstract Double apply(Double income, Double guaranteeAmount);
 }
