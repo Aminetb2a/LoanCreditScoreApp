@@ -31,6 +31,13 @@ public class LoanCreditScoreController {
     private static final UserDTOMapper userDTOMapper = new UserDTOMapper();
     private final UserService userService;
 
+    /**
+     * The Apply for loan controller gets the user's request as UserRequestDTO object
+     * forwards it to the UserService if valid for processing and returns the CreditScore
+     *
+     * @param userRequest The request body that is sent to the server.
+     * @return CreditScore
+     */
     @Operation(summary = "Apply for loan")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Applied for loan successfully",
@@ -44,6 +51,14 @@ public class LoanCreditScoreController {
         return userService.applyToLoan(new UserDTOMapper().mapToUserDTO(userRequest));
     }
 
+    /**
+     * The User update controller gets the user's request as UserRequestDTO object
+     * forwards it to the UserService if valid for updates and returns the Updated
+     * data
+     *
+     * @param userRequest The request body that is sent to the server.
+     * @return UserDTO
+     */
     @Operation(summary = "Update User")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User updated successfully",
@@ -56,6 +71,12 @@ public class LoanCreditScoreController {
         return userService.updateUser(userDTOMapper.mapToUserDTO(userRequest));
     }
 
+    /**
+     * The User deletion controller gets the user's id as path variable
+     * forwards it to the UserService if valid for deletion
+     *
+     * @path id The id of the user to delete.
+     */
     @Operation(summary = "Delete User")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User deleted successfully"),
@@ -66,6 +87,15 @@ public class LoanCreditScoreController {
         userService.deleteUser(id);
     }
 
+    /**
+     * The loan application report controller gets the user's ID number and birth date
+     * as parameters then forwards it to the UserService if valid for a check,
+     * returns the loan application report
+     *
+     * @param idNo      The client's ID number.
+     * @param birthdate The client's birth date.
+     * @return CreditScore
+     */
     @Operation(summary = "Loan Application Report")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Credit Loan Report returned successfully",
