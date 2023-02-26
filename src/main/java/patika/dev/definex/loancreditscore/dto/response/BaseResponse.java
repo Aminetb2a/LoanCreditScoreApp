@@ -13,7 +13,7 @@ import java.util.List;
 @JsonPropertyOrder({"success", "message", "data"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseResponse {
-    private Object data;
+    private Object result;
     private String message;
     private Boolean success;
     private List<ExceptionModel> exception;

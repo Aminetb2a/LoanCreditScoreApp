@@ -21,7 +21,7 @@ public class BaseResponseBody implements ResponseBodyAdvice {
     @Override
     public BaseResponse beforeBodyWrite(Object data, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse sResponse) {
         BaseResponse response = BaseResponse.builder()
-                .data(data)
+                .result(data)
                 .success(true)
                 .build();
         if (HttpMethod.DELETE.equals(request.getMethod()))
