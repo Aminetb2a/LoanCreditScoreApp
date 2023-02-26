@@ -87,6 +87,6 @@ And it uses an SMS service (Twilio) that you need to assign your username, passw
 You need to check the [documentation](http://localhost:8080/swagger-ui/index.html) to be able to use this application
 API correctly.
 
-![Application Documentation](src/main/assests/Loan Credit Application.png?raw=true "Loan Application Documentation")
+![Application Documentation](https://github.com/Aminetb2a/LoanCreditScoreApp/blob/master/src/main/assests/Loan%20Credit%20Application.png?raw=true "Loan Application Documentation")
 
 
