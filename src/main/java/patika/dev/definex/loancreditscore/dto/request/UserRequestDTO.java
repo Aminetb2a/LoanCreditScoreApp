@@ -17,12 +17,14 @@ public class UserRequestDTO {
     @NotBlank
     @Size(min = 2, max = 20)
     private String name;
+    @NotNull
     @Positive
     private Double income;
     @NotBlank
     @Size(min = 2, max = 20)
     private String surname;
     @Past
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthDate;
     @NotBlank
