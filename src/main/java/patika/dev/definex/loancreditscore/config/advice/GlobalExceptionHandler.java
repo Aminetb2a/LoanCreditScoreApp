@@ -1,5 +1,7 @@
 package patika.dev.definex.loancreditscore.config.advice;
 
+import com.twilio.exception.ApiException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,6 +12,7 @@ import patika.dev.definex.loancreditscore.config.exception.UserFoundException;
 import patika.dev.definex.loancreditscore.config.exception.UserNotFoundException;
 import patika.dev.definex.loancreditscore.dto.response.BaseResponse;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -23,6 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({DuplicateKeyException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody BaseResponse duplicateKeyExceptionHandler(DuplicateKeyException ex) {
+        log.error("DuplicateKeyException: A user with this information is already registered.");
         return getResponse("A user with this information is already registered.");
     }
 
@@ -36,6 +40,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({IllegalArgumentException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody BaseResponse illegalStateExceptionHandler(IllegalArgumentException ex) {
+        log.error("IllegalArgumentException: " + ex);
         return getResponse(ex.getMessage());
     }
 
@@ -62,6 +67,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({UserFoundException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody BaseResponse userFoundExceptionHandler(UserFoundException ex) {
+        return getResponse(ex.getMessage());
+    }
+
+    /**
+     * If a twilio ApiException is thrown, return a 400 Bad Request response with the exception
+     * message
+     *
+     * @param ex The exception object
+     * @return A BaseResponse object with the message from the exception.
+     */
+    @ExceptionHandler({ApiException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody BaseResponse twilioApiExceptionHandler(ApiException ex) {
+        log.error("ApiException: " + ex);
         return getResponse(ex.getMessage());
     }
 

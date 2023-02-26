@@ -3,6 +3,7 @@ package patika.dev.definex.loancreditscore.service.user;
 import com.twilio.rest.api.v2010.account.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import patika.dev.definex.loancreditscore.config.exception.UserFoundException;
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -62,6 +64,7 @@ public class UserServiceImpl implements UserService {
      * @param userDTO user's information
      * @return loan application status
      */
+    @SneakyThrows
     @Override
     public CreditScore applyToLoan(UserDTO userDTO) {
         // check if user with idNo exists
@@ -73,6 +76,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setLoanStatus(creditScore.getStatus());
         //send sms to client
         Message smsStatus = smsService.sendSms(userDTO.getPhoneNumber(), smsGenerator.generateSms(userDTO));
+        log.debug("Twilio message: " + (smsStatus == null ? "failed to send SMS" : smsStatus.toString()));
         // handle  SMS service failure
         Optional.ofNullable(smsStatus)
                 .map(Message::getSid)
