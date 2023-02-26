@@ -5,6 +5,10 @@ import patika.dev.definex.loancreditscore.constant.CreditScoreConstant.Limit;
 
 import static patika.dev.definex.loancreditscore.constant.CreditScoreConstant.CreditLimitMultiplier.CREDIT_LIMIT_MULTIPLIER;
 
+/**
+ * The Operator enum handles the credit limit calculation
+ * for each type of client depending on their income range
+ */
 public enum Operator {
 
     LOW {
