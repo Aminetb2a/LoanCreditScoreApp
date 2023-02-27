@@ -48,7 +48,7 @@ public class LoanCreditScoreController {
     @PostMapping(APPLY)
     @ResponseStatus(HttpStatus.CREATED)
     public CreditScore applyToLoan(@Valid @RequestBody UserRequestDTO userRequest) {
-        return userService.applyToLoan(new UserDTOMapper().mapToUserDTO(userRequest));
+        return userService.applyToLoan(userDTOMapper.mapToUserDTO(userRequest));
     }
 
     /**
